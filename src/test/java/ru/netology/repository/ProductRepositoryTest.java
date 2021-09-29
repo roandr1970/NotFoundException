@@ -35,14 +35,9 @@ class ProductRepositoryTest {
 
     @Test
     public void shouldNotFoundId() {
-        try {
-            repository.removeById(5);
-            fail();
-        } catch (NotFoundException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        assertThrows(NotFoundException.class, () -> {
+                    repository.removeById(5);
+        });
 
         Product[] actual = repository.findAll();
         Product[] expected = new Product[]{first, second, third};
